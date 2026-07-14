@@ -7,129 +7,83 @@ Sitio web corporativo para la empresa de transporte terrestre **Express Quinuapa
 ```
 sd-quinuapata-web/
 │
-├── index.html                  ← Página principal
+├── index.html                  ← Página principal (hero, rutas, flota, contacto, login)
 │
 ├── pages/
-│   ├── destinos.html           ← Rutas, horarios y destinos
-│   ├── servicios.html          ← Servicios ofrecidos
-│   ├── nosotros.html           ← Historia, misión, visión
-│   └── contacto.html           ← Formulario y sedes
-│
-├── components/
-│   ├── header.html             ← Navbar (cargado dinámicamente)
-│   ├── footer.html             ← Pie de página (cargado dinámicamente)
-│   └── whatsapp-btn.html       ← Placeholder del botón WhatsApp
+│   ├── destinos.html           ← Ruta Ayacucho–VRAEM, paradas y recomendaciones
+│   ├── servicios.html          ← Servicios: pasajes, encomiendas, fletes
+│   ├── nosotros.html           ← Historia, misión, visión y valores
+│   └── contacto.html           ← Formulario de contacto y datos del terminal
 │
 ├── assets/
-│   ├── css/
-│   │   ├── variables.css       ← Variables CSS (colores, tipografía, espaciado)
-│   │   ├── base.css            ← Reset, tipografía global, utilitarios
-│   │   ├── components.css      ← Header, Footer, Hero, Cards, Formularios, etc.
-│   │   └── responsive.css      ← Media queries (móvil, tablet, desktop)
-│   │
 │   ├── js/
-│   │   ├── main.js             ← Lógica principal (loader, scroll reveal, galería)
-│   │   ├── router.js           ← Carga componentes y maneja navegación activa
-│   │   └── whatsapp.js         ← Botón flotante de WhatsApp
+│   │   ├── main.js             ← Loader, animaciones scroll, contadores, formulario de contacto
+│   │   ├── router.js           ← Navbar, menú móvil, scroll-spy, smooth scroll
+│   │   └── login.js            ← Modal de inicio de sesión conectado al backend
 │   │
 │   └── media/
-│       ├── images/             ← Imágenes del sitio (agregar aquí)
-│       └── videos/             ← Videos del sitio (agregar aquí)
-│
-├── data/
-│   ├── config.json             ← Datos de la empresa, flota, redes sociales
-│   ├── destinos.json           ← Rutas, precios y descripción de destinos
-│   └── horarios.json           ← Horarios de salida por ruta
+│       ├── images/             ← Logo, flota (Hilux, Hiace) y foto del equipo
+│       └── videos/             ← Video de fondo del hero
 │
 ├── config/
-│   └── whatsapp.config.js      ← Configuración del botón de WhatsApp
+│   └── app.config.js           ← URLs del backend y del dashboard (editar para producción)
 │
 └── docs/
     └── README.md               ← Este archivo
 ```
 
----
-
-## Configuración rápida
-
-### 1. Datos de la empresa
-Edita `data/config.json` para actualizar:
-- Número de WhatsApp
-- Dirección de sedes
-- Redes sociales
-- Descripción de la flota
-
-### 2. Rutas y precios
-Edita `data/destinos.json` para agregar o modificar rutas y precios.
-
-### 3. Horarios
-Edita `data/horarios.json` para actualizar los horarios de salida.
-
-### 4. WhatsApp
-Edita `config/whatsapp.config.js` para personalizar:
-- Número de WhatsApp
-- Mensajes predeterminados por página
-- Horario de atención
-- Comportamiento del botón (pulso, tooltip, delay)
+Los estilos CSS están escritos dentro de cada página HTML (etiqueta `<style>`), sin hojas externas.
 
 ---
 
-## Imágenes recomendadas
+## Configuración para producción
 
-Agrega las siguientes imágenes en `assets/media/images/`:
+Edita `config/app.config.js` antes de subir al servidor:
 
-| Archivo                   | Uso                          | Tamaño recomendado |
-|---------------------------|------------------------------|--------------------|
-| `hero-bg.jpg`             | Fondo del hero principal     | 1920×1080          |
-| `hilux.jpg`               | Toyota Hilux                 | 800×450            |
-| `hiace.jpg`               | Toyota Hiace                 | 800×450            |
-| `ruta-pichari.jpg`        | Card de ruta a Pichari       | 600×400            |
-| `ruta-kimbiri.jpg`        | Card de ruta a Kimbiri       | 600×400            |
-| `ruta-sanfrancisco.jpg`   | Card de ruta a San Francisco | 600×400            |
-| `destino-pichari.jpg`     | Info destino Pichari         | 600×400            |
-| `destino-kimbiri.jpg`     | Info destino Kimbiri         | 600×400            |
-| `destino-sanfrancisco.jpg`| Info destino San Francisco   | 600×400            |
-| `gallery-1.jpg` … `5.jpg` | Galería de fotos             | 800×600            |
-| `nosotros-historia.jpg`   | Foto página Nosotros         | 800×600            |
-| `video-thumb-1.jpg`       | Miniatura video 1            | 1280×720           |
-| `video-thumb-2.jpg`       | Miniatura video 2            | 1280×720           |
-| `og-image.jpg`            | Imagen Open Graph            | 1200×630           |
+```js
+const AppConfig = {
+  API_URL:       "https://expressvraem.pe",        // backend (nginx hace el proxy)
+  DASHBOARD_URL: "https://expressvraem.pe/panel",  // panel administrativo
+};
+```
 
-## Videos recomendados
+- **Desarrollo local:** `API_URL = "http://localhost:8080"`, `DASHBOARD_URL = "http://localhost:3000"`.
+- El login envía las credenciales a `{API_URL}/api/auth/login` y redirige al dashboard pasando la sesión por el hash de la URL.
 
-Agrega los siguientes videos en `assets/media/videos/`:
+## Contenido editable
 
-| Archivo           | Descripción                           |
-|-------------------|---------------------------------------|
-| `ruta-hilux.mp4`  | Video del Toyota Hilux en ruta        |
-| `ruta-hiace.mp4`  | Video del Toyota Hiace con pasajeros  |
+Los datos de la empresa (teléfonos, horarios, rutas, precios) están escritos directamente en el HTML de cada página. Para actualizarlos, busca y reemplaza en:
+
+- `index.html` — teléfonos, enlaces de WhatsApp, rutas destacadas
+- `pages/destinos.html` — paradas de la ruta y recomendaciones
+- `pages/contacto.html` — teléfonos, dirección del terminal, horarios
 
 ---
 
 ## Tecnologías utilizadas
 
-- HTML5 semántico
-- CSS3 con Custom Properties (variables)
-- JavaScript vanilla (sin frameworks)
-- Google Fonts: Poppins
-- SVG icons inline (sin dependencias externas)
-- Intersection Observer API (animaciones scroll)
+- HTML5 semántico con CSS embebido por página
+- JavaScript vanilla (sin frameworks ni dependencias)
+- Google Fonts: Plus Jakarta Sans y Syne
+- SVG icons inline
+- Intersection Observer API (animaciones al hacer scroll)
 
 ## Paleta de colores
 
-| Variable              | Color     | Uso                    |
-|-----------------------|-----------|------------------------|
-| `--color-primary`     | `#1565C0` | Azul institucional     |
-| `--color-secondary`   | `#F9A825` | Amarillo / acento      |
-| `--color-primary-900` | `#0D47A1` | Azul oscuro            |
-| `--wa-color`          | `#25D366` | Verde WhatsApp         |
+| Variable    | Color     | Uso                     |
+|-------------|-----------|-------------------------|
+| `--navy`    | `#0A1628` | Fondo principal (oscuro)|
+| `--green`   | `#16a34a` | Acento principal / CTAs |
+| `--amber`   | `#F59E0B` | Acento secundario       |
+| `--blue`    | `#1565C0` | Azul institucional      |
 
 ---
 
 ## Contacto empresa
 
-- **Teléfono:** +51 966 123 456
-- **WhatsApp:** +51 966 123 456
+- **WhatsApp principal:** +51 943 960 656
+- **WhatsApp secundario:** +51 939 828 535
 - **Email:** info@expressquinuapata.com
-- **Dirección:** Jr. Libertad 345, Ayacucho, Perú
-- **Horario:** Lunes a Domingo 4:00 AM – 10:00 PM
+- **Dirección:** Jr. César Vallejo N.° 354, Ayacucho, Perú
+- **Horario:** Lun – Sáb: 5:00 a.m. – 8:00 p.m. / Dom: 5:00 a.m. – 1:00 p.m.
+- **Facebook:** [Express Quinuapata VRAEM SAC](https://www.facebook.com/ExpressQuinuapataVRAEMSAC)
