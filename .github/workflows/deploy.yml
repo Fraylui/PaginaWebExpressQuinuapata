@@ -1,0 +1,28 @@
+name: Deploy a Contabo
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Actualizar página web en el servidor
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Pull por SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 5.189.128.214
+          username: root
+          key: ${{ secrets.CONTABO_SSH_KEY }}
+          script: |
+            set -e
+            git -C /opt/paginaweb fetch origin main
+            git -C /opt/paginaweb reset --hard origin/main
+            echo "Web actualizada a: $(git -C /opt/paginaweb log --oneline -1)"
