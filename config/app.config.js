@@ -1,16 +1,22 @@
 /**
  * app.config.js — Configuración de URLs para producción
- * Editar este archivo antes de subir al servidor.
  *
- * Desarrollo local:
+ * Producción (dominio real):
+ *   - La web vive en https://expressquinuapata.com y nginx proxea /api al
+ *     backend en el MISMO origen → API_URL = location.origin (sin CORS).
+ *   - El panel vive en https://sistema.expressquinuapata.com.
+ *
+ * Vista previa por IP (mientras el DNS no está activo):
+ *   - Web:   http://5.189.128.214:8081  (el /api también funciona ahí)
+ *   - Panel: http://5.189.128.214
+ *
+ * Desarrollo local (npm/live-server sin nginx): cambiar temporalmente
  *   API_URL       = "http://localhost:8080"
  *   DASHBOARD_URL = "http://localhost:3000"
- *
- * Producción (ejemplo con dominio propio):
- *   API_URL       = "https://expressvraem.pe"       ← mismo servidor, nginx hace el proxy
- *   DASHBOARD_URL = "https://expressvraem.pe/panel"  ← o el subdominio donde esté el panel
  */
 const AppConfig = {
-  API_URL:       "https://expressvraem.pe",
-  DASHBOARD_URL: "https://expressvraem.pe/panel",
+  API_URL: location.origin,
+  DASHBOARD_URL: (location.hostname === "expressquinuapata.com" || location.hostname === "www.expressquinuapata.com")
+    ? "https://sistema.expressquinuapata.com"
+    : "http://" + location.hostname,  // vista previa por IP: panel en puerto 80
 };
