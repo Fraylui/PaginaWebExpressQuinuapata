@@ -151,6 +151,11 @@
     .nav-mobile__cta:hover::after{transform:translateX(100%)}
     .nav-mobile__cta:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.28);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,0,0,.25)}
     .nav-mobile__cta svg{width:18px;height:18px;flex-shrink:0}
+    .nav-mobile__cta--track{
+      background:rgba(22,163,74,.12);color:var(--green-l);
+      border-color:rgba(22,163,74,.45);
+    }
+    .nav-mobile__cta--track:hover{background:var(--green);color:var(--white);border-color:var(--green)}
 
     /* Landscape */
     @media(orientation:landscape) and (max-height:500px){
@@ -399,6 +404,19 @@
     .nav-login:hover{background:#15803d;transform:translateY(-1px);box-shadow:0 6px 20px rgba(22,163,74,.45)}
     .nav-login svg{width:14px;height:14px;flex-shrink:0}
 
+    /* Botón de rastreo para clientes (lleva a la página de seguimiento del sistema) */
+    .nav-track{
+      position:relative;overflow:hidden;
+      display:inline-flex;align-items:center;gap:.45rem;
+      background:rgba(22,163,74,.12);color:var(--green-l);
+      border:1.5px solid rgba(22,163,74,.45);
+      padding:.38rem 1rem;border-radius:9px;
+      font-size:.82rem;font-weight:700;
+      transition:background .2s,color .2s,transform .15s,box-shadow .2s;
+    }
+    .nav-track:hover{background:var(--green);color:var(--white);transform:translateY(-1px);box-shadow:0 6px 20px rgba(22,163,74,.35)}
+    .nav-track svg{width:14px;height:14px;flex-shrink:0}
+
     /* ===== LOGIN MODAL ===== */
     .login-modal{position:fixed;inset:0;z-index:2000;display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s ease}
     .login-modal.active{opacity:1;pointer-events:auto}
@@ -528,6 +546,12 @@
     <li><a href="#nosotros"  class="nav-link" data-section="nosotros">Nosotros</a></li>
     <li><a href="#contacto"  class="nav-link nav-cta" data-section="contacto">Contacto</a></li>
     <li>
+      <a href="https://sistema.expressquinuapata.com/tracking" class="nav-track" aria-label="Rastrear mi envío">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+        Rastrear envío
+      </a>
+    </li>
+    <li>
       <button class="nav-login" data-open-login aria-label="Iniciar sesión">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
         Iniciar sesión
@@ -571,6 +595,10 @@
       <svg class="nav-link__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" width="16" height="16"><path d="M9 18l6-6-6-6"/></svg>
     </a>
   </div>
+  <a href="https://sistema.expressquinuapata.com/tracking" class="nav-mobile__cta nav-mobile__cta--track">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/></svg>
+    Rastrear mi envío
+  </a>
   <a href="#contacto" class="nav-mobile__cta">
     <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.136.562 4.14 1.535 5.876L.057 23.5a.5.5 0 0 0 .613.637l5.752-1.506A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.683-.5-5.23-1.376l-.374-.215-3.875 1.015 1.033-3.77-.23-.387A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
     Contáctanos
