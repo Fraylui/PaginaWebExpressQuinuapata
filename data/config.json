@@ -1,0 +1,52 @@
+{
+  "empresa": {
+    "nombre": "Express Quinuapata VRAEM S.A.C.",
+    "nombreCorto": "Express Quinuapata",
+    "slogan": "Tu viaje seguro al VRAEM",
+    "ruc": "20603158211",
+    "fundacion": "2018",
+    "descripcion": "Empresa líder en transporte terrestre que conecta Ayacucho con el Valle de los Ríos Apurímac, Ene y Mantaro (VRAEM), ofreciendo el mejor servicio en comodidad y puntualidad.",
+    "mision": "Brindar un servicio de transporte terrestre seguro, cómodo y puntual, conectando a las comunidades del VRAEM con Ayacucho, contribuyendo al desarrollo económico y social de la región.",
+    "vision": "Ser la empresa de transporte más confiable y reconocida en la ruta Ayacucho–VRAEM, expandiendo nuestra flota y mejorando continuamente la calidad de servicio.",
+    "valores": ["Seguridad", "Puntualidad", "Comodidad", "Honestidad", "Compromiso"]
+  },
+  "contacto": {
+    "telefono": "+51 943 960 656",
+    "telefono2": "+51 939 828 535",
+    "whatsapp": "51943960656",
+    "whatsapp2": "51939828535",
+    "email": "info@expressquinuapata.com"
+  },
+  "sedes": [
+    {
+      "nombre": "Terminal Ayacucho",
+      "direccion": "Jr. César Vallejo N.° 354",
+      "distrito": "Ayacucho",
+      "provincia": "Huamanga",
+      "region": "Ayacucho",
+      "horario": "Lun – Sáb: 5:00 a.m. – 8:00 p.m. / Dom: 5:00 a.m. – 1:00 p.m.",
+      "tipo": "principal"
+    }
+  ],
+  "redesSociales": {
+    "facebook": "https://www.facebook.com/ExpressQuinuapataVRAEMSAC"
+  },
+  "flota": [
+    {
+      "modelo": "Toyota Hilux",
+      "tipo": "Camioneta 4x4",
+      "capacidad": 5,
+      "descripcion": "Ideal para zonas de difícil acceso y caminos de la sierra.",
+      "imagen": "assets/media/images/flota-hilux.png",
+      "caracteristicas": ["4x4 todo terreno", "Aire acondicionado", "GPS en tiempo real", "Cinturones de seguridad", "Radio FM / Bluetooth"]
+    },
+    {
+      "modelo": "Toyota Hiace",
+      "tipo": "Minivan de pasajeros",
+      "capacidad": 14,
+      "descripcion": "Máxima comodidad para grupos, con amplio espacio de equipaje.",
+      "imagen": "assets/media/images/flota-hiace.png",
+      "caracteristicas": ["14 asientos confortables", "Aire acondicionado", "GPS en tiempo real", "Portaequipaje amplio", "USB por asiento"]
+    }
+  ]
+}

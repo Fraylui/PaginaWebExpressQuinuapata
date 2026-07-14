@@ -1,0 +1,311 @@
+<!-- ============================================================
+     HEADER — Express Quinuapata VRAEM S.A.C.
+     ============================================================ -->
+<style>
+  /* ════════════════════════════════
+     NAVBAR BASE
+  ════════════════════════════════ */
+  .navbar {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 300;
+    height: 72px;
+    transition: background 0.35s ease, box-shadow 0.35s ease;
+  }
+  .navbar__inner {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 24px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* ════════════════════════════════
+     ESTADOS: transparente / blanca
+  ════════════════════════════════ */
+  .navbar-transparente {
+    background: transparent;
+    box-shadow: none;
+  }
+  .navbar-blanca {
+    background: rgba(10, 22, 40, 0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    box-shadow: 0 2px 24px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.06);
+  }
+
+  /* ════════════════════════════════
+     LOGO
+  ════════════════════════════════ */
+  .navbar__logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    flex-shrink: 0;
+  }
+  .navbar__logo-img {
+    height: 52px;
+    width: auto;
+    object-fit: contain;
+    display: block;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.4));
+  }
+  @media (max-width: 768px) {
+    .navbar__logo-img { height: 42px; }
+  }
+
+  /* ════════════════════════════════
+     LINKS DE NAVEGACIÓN
+  ════════════════════════════════ */
+  .navbar__links {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+  }
+  .nav-link {
+    display: inline-block;
+    padding: 8px 14px;
+    color: rgba(255,255,255,0.85);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: color 0.2s, background 0.2s;
+    position: relative;
+  }
+  .nav-link:hover { color: white; background: rgba(255,255,255,0.08); }
+  .nav-link.activo {
+    color: #F59E0B !important;
+    font-weight: 700;
+  }
+  .nav-link.activo::after {
+    content: '';
+    position: absolute;
+    bottom: 2px; left: 14px; right: 14px;
+    height: 2px;
+    background: #F59E0B;
+    border-radius: 2px;
+  }
+  .navbar-transparente .nav-link        { color: rgba(255,255,255,0.88); }
+  .navbar-transparente .nav-link:hover  { color: white; background: rgba(255,255,255,0.1); }
+  .navbar-transparente .nav-link.activo { color: #F59E0B !important; }
+
+  /* ════════════════════════════════
+     DERECHA: TELÉFONO + BOTÓN CTA
+  ════════════════════════════════ */
+  .navbar__right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-shrink: 0;
+  }
+  .navbar__phone {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: rgba(255,255,255,0.75);
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .navbar__phone:hover { color: white; }
+  .navbar-transparente .navbar__phone       { color: rgba(255,255,255,0.8); }
+  .navbar-transparente .navbar__phone:hover { color: white; }
+
+  .navbar__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #F59E0B;
+    color: #0F172A;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 700;
+    padding: 9px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.2s;
+    white-space: nowrap;
+  }
+  .navbar__cta:hover { background: #D97706; transform: translateY(-1px); }
+
+  /* ════════════════════════════════
+     HAMBURGUESA
+  ════════════════════════════════ */
+  .navbar__hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 8px;
+    background: none;
+    border: none;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .navbar__hamburger:hover { background: rgba(0,0,0,0.06); }
+  .hamburger-line {
+    width: 24px; height: 2px;
+    background: #0F172A;
+    border-radius: 2px;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .navbar-transparente .hamburger-line { background: white; }
+  .navbar-blanca .hamburger-line       { background: rgba(255,255,255,0.85); }
+  .navbar__hamburger.open .hamburger-line:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .navbar__hamburger.open .hamburger-line:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .navbar__hamburger.open .hamburger-line:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* ════════════════════════════════
+     MENÚ MÓVIL
+  ════════════════════════════════ */
+  .nav-mobile {
+    display: none;
+    position: absolute;
+    top: 100%; left: 0; right: 0;
+    background: white;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    padding: 12px 16px 20px;
+    z-index: 999;
+  }
+  .nav-mobile.abierto {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    animation: navSlideDown 0.28s ease;
+  }
+  @keyframes navSlideDown {
+    from { opacity: 0; transform: translateY(-8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nav-mobile .nav-link {
+    color: #0F172A !important;
+    padding: 14px 16px;
+    font-size: 1rem;
+    border-radius: 10px;
+  }
+  .nav-mobile .nav-link:hover  { background: #E3F2FD; color: #1565C0 !important; }
+  .nav-mobile .nav-link.activo { color: #F59E0B !important; background: #FEF3C7; }
+  .nav-mobile .nav-link.activo::after { display: none; }
+  .nav-mobile__sep {
+    height: 1px;
+    background: #E2E8F0;
+    margin: 8px 0;
+  }
+  .nav-mobile__cta {
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px;
+    background: #F59E0B; color: #0F172A;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-weight: 700; font-size: 0.95rem;
+    padding: 14px 20px; border-radius: 12px;
+    text-decoration: none;
+    margin-top: 4px;
+    transition: background 0.2s;
+  }
+  .nav-mobile__cta:hover { background: #D97706; }
+
+  /* ════════════════════════════════
+     RESPONSIVE
+  ════════════════════════════════ */
+  @media (max-width: 1024px) {
+    .navbar__phone { display: none; }
+  }
+  @media (max-width: 768px) {
+    .navbar__links     { display: none; }
+    .navbar__cta       { display: none; }
+    .navbar__hamburger { display: flex; }
+    .navbar { height: 64px; }
+  }
+  @media (max-width: 480px) {
+    .navbar { height: 60px; }
+    .navbar__inner { padding: 0 16px; gap: 12px; }
+    .navbar__logo-img { height: 40px; }
+  }
+  @media (max-width: 360px) {
+    .navbar { height: 56px; }
+    .navbar__inner { padding: 0 12px; gap: 8px; }
+    .navbar__logo-img { height: 34px; }
+    .navbar__hamburger { padding: 6px; }
+  }
+  /* Menú móvil: asegurar que sea legible en pantallas pequeñas */
+  @media (max-width: 360px) {
+    .nav-mobile .nav-link { padding: 12px 14px; font-size: 0.95rem; }
+    .nav-mobile__cta { padding: 12px 16px; font-size: 0.9rem; }
+  }
+</style>
+
+<header class="navbar navbar-blanca" role="banner" id="main-navbar">
+  <div class="navbar__inner">
+
+    <!-- Logo -->
+    <a href="index.html" class="navbar__logo" aria-label="Express Quinuapata VRAEM — Inicio">
+      <img src="assets/media/images/logo.png" alt="Express Quinuapata VRAEM S.A.C." class="navbar__logo-img" />
+    </a>
+
+    <!-- Links desktop -->
+    <ul class="navbar__links" role="list">
+      <li><a href="index.html#inicio"    class="nav-link" data-section="inicio">Inicio</a></li>
+      <li><a href="index.html#destinos"  class="nav-link" data-section="destinos">Destinos</a></li>
+      <li><a href="index.html#servicios" class="nav-link" data-section="servicios">Servicios</a></li>
+      <li><a href="index.html#nosotros"  class="nav-link" data-section="nosotros">Nosotros</a></li>
+      <li><a href="index.html#contacto"  class="nav-link" data-section="contacto">Contacto</a></li>
+    </ul>
+
+    <!-- Derecha -->
+    <div class="navbar__right">
+      <a href="tel:+51943960656" class="navbar__phone" aria-label="Llamar 943 960 656">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.38 2 2 0 0 1 3.58 1h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l1.02-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        943 960 656
+      </a>
+
+      <a href="https://wa.me/51943960656?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
+         target="_blank" rel="noopener"
+         class="navbar__cta"
+         aria-label="Contactar por WhatsApp">
+        Contáctanos
+      </a>
+
+      <!-- Hamburguesa -->
+      <button class="navbar__hamburger"
+              aria-label="Abrir menú"
+              aria-expanded="false"
+              aria-controls="nav-mobile">
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+        <span class="hamburger-line"></span>
+      </button>
+    </div>
+
+  </div>
+
+  <!-- Menú móvil -->
+  <nav class="nav-mobile" id="nav-mobile" role="navigation" aria-label="Menú principal">
+    <a href="index.html#inicio"    class="nav-link" data-section="inicio">Inicio</a>
+    <a href="index.html#destinos"  class="nav-link" data-section="destinos">Destinos</a>
+    <a href="index.html#servicios" class="nav-link" data-section="servicios">Servicios</a>
+    <a href="index.html#nosotros"  class="nav-link" data-section="nosotros">Nosotros</a>
+    <a href="index.html#contacto"  class="nav-link" data-section="contacto">Contacto</a>
+    <div class="nav-mobile__sep"></div>
+    <a href="https://wa.me/51943960656?text=Hola%2C%20quiero%20informaci%C3%B3n%20sobre%20sus%20servicios"
+       target="_blank" rel="noopener"
+       class="nav-mobile__cta">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.136.562 4.14 1.535 5.876L.057 23.5a.5.5 0 0 0 .613.637l5.752-1.506A11.945 11.945 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.9 0-3.683-.5-5.23-1.376l-.374-.215-3.875 1.015 1.033-3.77-.23-.387A9.944 9.944 0 0 1 2 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/>
+      </svg>
+      Contáctanos por WhatsApp
+    </a>
+  </nav>
+</header>
