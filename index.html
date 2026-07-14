@@ -353,7 +353,13 @@
     #btn-arriba svg{width:20px;height:20px}
 
     /* ===== RESPONSIVE ===== */
-    @media(max-width:900px){
+    /* Con el botón de rastreo el nav necesita más ancho: el hamburguesa entra antes
+       y en anchos intermedios se compactan los espacios para que nada se monte. */
+    @media(max-width:1380px){
+      .nav-desktop{gap:1.1rem}
+      .nav-link{font-size:.85rem}
+    }
+    @media(max-width:1280px){
       .nav-desktop{display:none}
       .navbar__hamburger{display:flex}
     }
@@ -394,7 +400,7 @@
       display:inline-flex;align-items:center;gap:.45rem;
       background:var(--green);color:var(--white);
       padding:.44rem 1.1rem;border-radius:9px;
-      font-size:.82rem;font-weight:700;border:none;
+      font-size:.82rem;font-weight:700;border:none;white-space:nowrap;
       box-shadow:0 4px 14px rgba(22,163,74,.35);
       transition:background .2s,transform .15s,box-shadow .2s;
       cursor:pointer;
@@ -411,7 +417,7 @@
       background:rgba(22,163,74,.12);color:var(--green-l);
       border:1.5px solid rgba(22,163,74,.45);
       padding:.38rem 1rem;border-radius:9px;
-      font-size:.82rem;font-weight:700;
+      font-size:.82rem;font-weight:700;white-space:nowrap;
       transition:background .2s,color .2s,transform .15s,box-shadow .2s;
     }
     .nav-track:hover{background:var(--green);color:var(--white);transform:translateY(-1px);box-shadow:0 6px 20px rgba(22,163,74,.35)}
